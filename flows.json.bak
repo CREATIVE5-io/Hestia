@@ -2,7 +2,7 @@
     {
         "id": "19963184527dc258",
         "type": "tab",
-        "label": "Hestia Example",
+        "label": "NTN Link Example",
         "disabled": false,
         "info": "",
         "env": []
@@ -95,7 +95,7 @@
     {
         "id": "5520481166c942f6",
         "type": "ui_tab",
-        "name": "Example Hestia",
+        "name": "Example NTN Link",
         "icon": "dashboard",
         "disabled": false,
         "hidden": false
