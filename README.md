@@ -1,7 +1,7 @@
-Sample code to demo "How to using NTN Link with Node-RED".
+Sample code to demo "How to using Hestia with Node-RED".
 
 # General Description
-NTN Link, built with Compal RMM-T1 NTN Module (SKYLO certified & Compliant with 3GPP Rel. 17 Standard) is a 2-way satellite communicator designed to transit IOT data located in area beyond cell coverage.
+Hestia, built with Compal RMM-T1 NTN Module (SKYLO certified & Compliant with 3GPP Rel. 17 Standard) is a 2-way satellite communicator designed to transit IOT data located in area beyond cell coverage.
 
 ## Core Functionalities:
  - Bi-directional satellite data transmission
