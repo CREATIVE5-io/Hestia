@@ -26,6 +26,7 @@ There are two dependencies on this sample flow.
 3. Monitor and Operate: Monitor data transmission and perform related operations through the Node-RED Dashboard interface.
 4. The user must enter a password at every power-on before normal operation.
 
-#Update
+# Update
 ## Branch information
-main branch: Hestia A1 (NTN only)
+- main branch: Hestia A1 (NTN only)
+- hestia_A2 branch: Hestia A2 (NTN + LoRaWAN Gateway UP200)
