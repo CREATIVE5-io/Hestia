@@ -1,7 +1,7 @@
 {
     "name": "Hestia",
     "description": "A Node-RED Project",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "dependencies": {},
     "node-red": {
         "settings": {

@@ -24,3 +24,8 @@ There are two dependencies on this sample flow.
 1. Configure Modbus Nodes: Ensure that the port settings of the Modbus nodes(Modbus Flex Getter / Modbus Flex Write) match the host.
 2. Deploy Flow: Click the "Deploy" button in the Node-RED interface.
 3. Monitor and Operate: Monitor data transmission and perform related operations through the Node-RED Dashboard interface.
+4. The user must enter a password at every power-on before normal operation.
+
+#Update
+## Branch information
+main branch: Hestia A1 (NTN only)
