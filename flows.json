@@ -8,6 +8,14 @@
         "env": []
     },
     {
+        "id": "de02eac62658ec1d",
+        "type": "tab",
+        "label": "Module_LoRaWAN_UP200",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "ffc5afacf1c17b90",
         "type": "modbus-client",
         "name": "",
@@ -213,6 +221,38 @@
         "name": "Change Password",
         "tab": "5520481166c942f6",
         "order": 5,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "56cc324ebb1911bb",
+        "type": "ui_spacer",
+        "z": "de02eac62658ec1d",
+        "name": "spacer",
+        "group": "489c2f3c13315266",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "489c2f3c13315266",
+        "type": "ui_group",
+        "name": "LoRaWANConfig",
+        "tab": "5520481166c942f6",
+        "order": 8,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "058633845f213a82",
+        "type": "ui_group",
+        "name": "LoRaWAN Data",
+        "tab": "5520481166c942f6",
+        "order": 9,
         "disp": true,
         "width": "8",
         "collapse": false,
@@ -626,10 +666,18 @@
             [
                 "b59bf466d18f84dc"
             ],
-            [],
-            [],
-            [],
-            [],
+            [
+                "0e57f4eba172672a"
+            ],
+            [
+                "9f54a80fb5c19325"
+            ],
+            [
+                "7fe0ab9b337c33e5"
+            ],
+            [
+                "daf179883f6bbd8c"
+            ],
             []
         ]
     },
@@ -3096,6 +3144,7 @@
         "z": "9c79856d0baec4d4",
         "name": "link in 65",
         "links": [
+            "1a323665474f5924",
             "bfde0a6df9bb1924"
         ],
         "x": 1275,
@@ -3851,6 +3900,1226 @@
         "info": "The user must enter a password at every power-on before normal operation.",
         "x": 380,
         "y": 3820,
+        "wires": []
+    },
+    {
+        "id": "8a9dc34d1caf3b9b",
+        "type": "link in",
+        "z": "9c79856d0baec4d4",
+        "name": "link in 70",
+        "links": [
+            "a003a7f73768e909"
+        ],
+        "x": 1145,
+        "y": 980,
+        "wires": [
+            [
+                "f1fcf1d7777f56f4"
+            ]
+        ]
+    },
+    {
+        "id": "0e57f4eba172672a",
+        "type": "switch",
+        "z": "9c79856d0baec4d4",
+        "name": "",
+        "property": "payload.data[0]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1770,
+        "y": 1460,
+        "wires": [
+            [],
+            [
+                "d7bcb6969b077517"
+            ]
+        ]
+    },
+    {
+        "id": "d7bcb6969b077517",
+        "type": "function",
+        "z": "9c79856d0baec4d4",
+        "name": "pcie2 response length",
+        "func": "const din = msg.payload.data[0];\nmsg.payload = din;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2000,
+        "y": 1480,
+        "wires": [
+            [
+                "34f7144501dca214"
+            ]
+        ]
+    },
+    {
+        "id": "9f54a80fb5c19325",
+        "type": "function",
+        "z": "9c79856d0baec4d4",
+        "name": "pcie2 response",
+        "func": "const version = msg.payload.buffer.toString();\nmsg.payload = version;\nmsg.topic = \"f861\";\n/*\nconst checkItems = [\"+CRTDCP\", \"$GNRMC\",\"*MSQN\"];\n\nlet dataType=\"\";\nconst checkItemsLength = checkItems.length;\nfor (let i = 0; i < checkItemsLength;i++){\n    if(version.indexOf(checkItems[i])>-1){\n        dataType = checkItems[i];\n        break;\n    }\n}\nlet dataOut =[dataType,version];\nlet msg2={\n    \"payload\":dataOut\n}\nreturn [msg,msg2];\n*/\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1800,
+        "y": 1560,
+        "wires": [
+            [
+                "e8236adacfcfa5ea",
+                "ab4da720c0e40ac7"
+            ]
+        ]
+    },
+    {
+        "id": "7fe0ab9b337c33e5",
+        "type": "switch",
+        "z": "9c79856d0baec4d4",
+        "name": "",
+        "property": "payload.data[0]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1770,
+        "y": 1640,
+        "wires": [
+            [],
+            [
+                "f8e4128e9423eedd"
+            ]
+        ]
+    },
+    {
+        "id": "f8e4128e9423eedd",
+        "type": "function",
+        "z": "9c79856d0baec4d4",
+        "name": "pcie2 response length (downlink)",
+        "func": "const din = msg.payload.data[0];\nmsg.payload = din;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2000,
+        "y": 1660,
+        "wires": [
+            [
+                "fed368d21a8a085a"
+            ]
+        ]
+    },
+    {
+        "id": "daf179883f6bbd8c",
+        "type": "function",
+        "z": "9c79856d0baec4d4",
+        "name": "pcie2 response downlink",
+        "func": "const version = msg.payload.buffer.toString();\nmsg.payload = version;\nmsg.topic = \"f461\";\n/*\nconst checkItems = [\"+CRTDCP\", \"$GNRMC\",\"*MSQN\"];\n\nlet dataType=\"\";\nconst checkItemsLength = checkItems.length;\nfor (let i = 0; i < checkItemsLength;i++){\n    if(version.indexOf(checkItems[i])>-1){\n        dataType = checkItems[i];\n        break;\n    }\n}\nlet dataOut =[dataType,version];\nlet msg2={\n    \"payload\":dataOut\n}\nreturn [msg,msg2];\n*/\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1830,
+        "y": 1720,
+        "wires": [
+            [
+                "e8236adacfcfa5ea",
+                "ab4da720c0e40ac7"
+            ]
+        ]
+    },
+    {
+        "id": "34f7144501dca214",
+        "type": "link out",
+        "z": "9c79856d0baec4d4",
+        "name": "0xf860_response",
+        "mode": "link",
+        "links": [
+            "fb06c3d33f4b16a4"
+        ],
+        "x": 2245,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "fed368d21a8a085a",
+        "type": "link out",
+        "z": "9c79856d0baec4d4",
+        "name": "0xf460_response",
+        "mode": "link",
+        "links": [
+            "632bcb645dde6803"
+        ],
+        "x": 2205,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "e8236adacfcfa5ea",
+        "type": "link out",
+        "z": "9c79856d0baec4d4",
+        "name": "pcie2_response_info(0xf61/0xf461)",
+        "mode": "link",
+        "links": [
+            "ba06fa950b907149"
+        ],
+        "x": 2255,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "ab4da720c0e40ac7",
+        "type": "debug",
+        "z": "9c79856d0baec4d4",
+        "name": "debug 153",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2310,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "a7969e8989b696b0",
+        "type": "inject",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "ATZ",
+        "payloadType": "str",
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "8ecbb81ffddd5b55"
+            ]
+        ]
+    },
+    {
+        "id": "afb4064d19614176",
+        "type": "inject",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "AT+VER=?",
+        "payloadType": "str",
+        "x": 360,
+        "y": 320,
+        "wires": [
+            [
+                "8ecbb81ffddd5b55"
+            ]
+        ]
+    },
+    {
+        "id": "5b3d0881862fb8a5",
+        "type": "inject",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "AT+HWVER=?",
+        "payloadType": "str",
+        "x": 340,
+        "y": 400,
+        "wires": [
+            [
+                "8ecbb81ffddd5b55"
+            ]
+        ]
+    },
+    {
+        "id": "8edfca35e7edee8b",
+        "type": "comment",
+        "z": "de02eac62658ec1d",
+        "name": "Module Reset",
+        "info": "UP200 reset command",
+        "x": 350,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d4283e1349870dd5",
+        "type": "comment",
+        "z": "de02eac62658ec1d",
+        "name": "Get FW Version",
+        "info": "UP200, get firmware version command",
+        "x": 340,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "4cc3e5321f78f612",
+        "type": "comment",
+        "z": "de02eac62658ec1d",
+        "name": "Get HW Version",
+        "info": "UP200, get hardware version command",
+        "x": 340,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "5224297312f1b41f",
+        "type": "inject",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "30",
+        "topic": "",
+        "payload": "AT+BISGET=?",
+        "payloadType": "str",
+        "x": 340,
+        "y": 500,
+        "wires": [
+            [
+                "8ecbb81ffddd5b55"
+            ]
+        ]
+    },
+    {
+        "id": "7e979f2e41509e47",
+        "type": "comment",
+        "z": "de02eac62658ec1d",
+        "name": "Get sensor data",
+        "info": "UP200, get sensor data command (while set to NTN format)\n\nthis sample, after the program starts, it sends \"get sensor data\" command every minute, starting 30 seconds after launch.",
+        "x": 340,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "8ecbb81ffddd5b55",
+        "type": "function",
+        "z": "de02eac62658ec1d",
+        "name": "cconvert to modbus cmd: pcie2",
+        "func": "let tmp = msg.payload + \"\\r\\n\";\n//let tmp=msg.payload+\"\\r\";\nlet buf = Buffer.from(tmp);\nlet d_length = tmp.length;\nconsole.log(\"d_length=\", d_length);\nif ((tmp.length % 2) > 0) {\n    //buf.push(0x00);\n    //buf=Buffer.concat(buf,[0x00]);\n    tmp = tmp.concat('\\0');\n    buf = Buffer.from(tmp);\n    console.log(\"buf=\", buf);\n    d_length += 1;\n}\n\n//const unitID = flow.get(\"mid\");\n\nmsg.payload = {\n    value: buf,//msg.payload,\n    fc: 16,\n    unitid: 1,//unitID,\n    address: 0xc700,//0xc950,//0,\n    quantity: d_length\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 540,
+        "wires": [
+            [
+                "1a323665474f5924"
+            ]
+        ]
+    },
+    {
+        "id": "98d79d433f287679",
+        "type": "ui_dropdown",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "label": "Set Frequency",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "489c2f3c13315266",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "908.5MHz",
+                "value": 908500000,
+                "type": "num"
+            },
+            {
+                "label": "914.2MHz",
+                "value": 914200000,
+                "type": "num"
+            },
+            {
+                "label": "923.2MHz",
+                "value": 923200000,
+                "type": "num"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 320,
+        "y": 600,
+        "wires": [
+            [
+                "73bbb78fa6401f21"
+            ]
+        ]
+    },
+    {
+        "id": "73bbb78fa6401f21",
+        "type": "function",
+        "z": "de02eac62658ec1d",
+        "name": "set Freq (LoRaWAN)",
+        "func": "const cmd = \"AT+BISRXF=\" + msg.payload;\nmsg.payload = cmd;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 600,
+        "wires": [
+            [
+                "8ecbb81ffddd5b55"
+            ]
+        ]
+    },
+    {
+        "id": "2be64620a238be24",
+        "type": "ui_dropdown",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "label": "Set SF",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "489c2f3c13315266",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "7",
+                "value": 7,
+                "type": "num"
+            },
+            {
+                "label": "8",
+                "value": 8,
+                "type": "num"
+            },
+            {
+                "label": "9",
+                "value": 9,
+                "type": "num"
+            },
+            {
+                "label": "10",
+                "value": 10,
+                "type": "num"
+            },
+            {
+                "label": "11",
+                "value": 11,
+                "type": "num"
+            },
+            {
+                "label": "12",
+                "value": 12,
+                "type": "num"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 350,
+        "y": 660,
+        "wires": [
+            [
+                "f65bf3e90bc86642"
+            ]
+        ]
+    },
+    {
+        "id": "f65bf3e90bc86642",
+        "type": "function",
+        "z": "de02eac62658ec1d",
+        "name": "set SF (LoRaWAN)",
+        "func": "const cmd = \"AT+BISRXSF=\" + msg.payload;\nmsg.payload = cmd;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 660,
+        "wires": [
+            [
+                "8ecbb81ffddd5b55"
+            ]
+        ]
+    },
+    {
+        "id": "07169edbc1f17b6d",
+        "type": "ui_form",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "label": "ABP Mode Set(Private Key)",
+        "group": "489c2f3c13315266",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Index",
+                "value": "index",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Devaddr",
+                "value": "devaddr",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Nwkskey",
+                "value": "nwkskey",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Appskey",
+                "value": "appskey",
+                "type": "text",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "index": "",
+            "devaddr": "",
+            "nwkskey": "",
+            "appskey": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 260,
+        "y": 720,
+        "wires": [
+            [
+                "ecc92573e8366d13"
+            ]
+        ]
+    },
+    {
+        "id": "ecc92573e8366d13",
+        "type": "function",
+        "z": "de02eac62658ec1d",
+        "name": "set private key (LoRaWAN)",
+        "func": "const cmd = \"AT+BISDEV=\" + msg.payload.index + \":\" + msg.payload.devaddr + \":\" + msg.payload.nwkskey + \":\" + msg.payload.appskey;\nmsg.payload = cmd;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 720,
+        "wires": [
+            [
+                "8ecbb81ffddd5b55"
+            ]
+        ]
+    },
+    {
+        "id": "ede172d70913cc3a",
+        "type": "function",
+        "z": "de02eac62658ec1d",
+        "name": "set common key (LoRaWAN)",
+        "func": "const cmd = \"AT+BISADMIN=\" + msg.payload.nwkskey + \":\" + msg.payload.appskey;\nmsg.payload = cmd;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 780,
+        "wires": [
+            [
+                "8ecbb81ffddd5b55"
+            ]
+        ]
+    },
+    {
+        "id": "6ad2e1ed9a7ef2fb",
+        "type": "ui_form",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "label": "Common Key",
+        "group": "489c2f3c13315266",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Nwkskey",
+                "value": "nwkskey",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Appskey",
+                "value": "appskey",
+                "type": "text",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "nwkskey": "",
+            "appskey": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 300,
+        "y": 780,
+        "wires": [
+            [
+                "ede172d70913cc3a"
+            ]
+        ]
+    },
+    {
+        "id": "02f1e6d800f4d58b",
+        "type": "ui_button",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "group": "489c2f3c13315266",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Save & Apply",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 310,
+        "y": 840,
+        "wires": [
+            [
+                "119cc32406d595ad"
+            ]
+        ]
+    },
+    {
+        "id": "119cc32406d595ad",
+        "type": "function",
+        "z": "de02eac62658ec1d",
+        "name": "Save (LoRaWAN)",
+        "func": "const cmd = \"AT+BISS\";\nmsg.payload = cmd;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 840,
+        "wires": [
+            [
+                "8ecbb81ffddd5b55",
+                "855813b9cfe8f960"
+            ]
+        ]
+    },
+    {
+        "id": "855813b9cfe8f960",
+        "type": "delay",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 400,
+        "y": 920,
+        "wires": [
+            [
+                "6d8f76b2a4d0c7de"
+            ]
+        ]
+    },
+    {
+        "id": "6d8f76b2a4d0c7de",
+        "type": "function",
+        "z": "de02eac62658ec1d",
+        "name": "restart (LoRaWAN)",
+        "func": "const cmd = \"ATZ\";\nmsg.payload = cmd;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 920,
+        "wires": [
+            [
+                "8ecbb81ffddd5b55"
+            ]
+        ]
+    },
+    {
+        "id": "1a323665474f5924",
+        "type": "link out",
+        "z": "de02eac62658ec1d",
+        "name": "lorawanConfig",
+        "mode": "link",
+        "links": [
+            "52c42dc2e7c08b18"
+        ],
+        "x": 1195,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "f047a1c0d1abe8f5",
+        "type": "inject",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 1300,
+        "wires": [
+            [
+                "aa4f6d43a7809027"
+            ]
+        ]
+    },
+    {
+        "id": "ab7a85a4b1a3d8d5",
+        "type": "inject",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 1560,
+        "wires": [
+            [
+                "2565fd9126ea43c6"
+            ]
+        ]
+    },
+    {
+        "id": "aa4f6d43a7809027",
+        "type": "switch",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "property": "pause",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 1300,
+        "wires": [
+            [],
+            [
+                "766c68e531d686c2"
+            ]
+        ]
+    },
+    {
+        "id": "7368c8c9f43a4083",
+        "type": "switch",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "property": "pause",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 1400,
+        "wires": [
+            [],
+            [
+                "b1f7e10da9f3175d"
+            ]
+        ]
+    },
+    {
+        "id": "2565fd9126ea43c6",
+        "type": "switch",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "property": "pause",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 1560,
+        "wires": [
+            [],
+            [
+                "7477d93d06b6b87f"
+            ]
+        ]
+    },
+    {
+        "id": "415f3fee14dfb1d4",
+        "type": "switch",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "property": "pause",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 1660,
+        "wires": [
+            [],
+            [
+                "643c63337745e66a"
+            ]
+        ]
+    },
+    {
+        "id": "766c68e531d686c2",
+        "type": "delay",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "0",
+        "randomLast": "1000",
+        "randomUnits": "milliseconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 650,
+        "y": 1320,
+        "wires": [
+            [
+                "74610b566c4c68c1"
+            ]
+        ]
+    },
+    {
+        "id": "b1f7e10da9f3175d",
+        "type": "delay",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "0",
+        "randomLast": "1000",
+        "randomUnits": "milliseconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 650,
+        "y": 1420,
+        "wires": [
+            [
+                "466aa5bb191e8f9a"
+            ]
+        ]
+    },
+    {
+        "id": "7477d93d06b6b87f",
+        "type": "delay",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "0",
+        "randomLast": "1000",
+        "randomUnits": "milliseconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 650,
+        "y": 1580,
+        "wires": [
+            [
+                "d8a8a94373fe63b5"
+            ]
+        ]
+    },
+    {
+        "id": "643c63337745e66a",
+        "type": "delay",
+        "z": "de02eac62658ec1d",
+        "name": "",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "0",
+        "randomLast": "1000",
+        "randomUnits": "milliseconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 650,
+        "y": 1680,
+        "wires": [
+            [
+                "e0a0c1637158eeb9"
+            ]
+        ]
+    },
+    {
+        "id": "74610b566c4c68c1",
+        "type": "function",
+        "z": "de02eac62658ec1d",
+        "name": "FC4 - Unit-ID 1 - Register 0xf860",
+        "func": "//const unitID = flow.get(\"mid\");\n//const mode = flow.get(\"modbus_passthrough\");\n//if (mode==true){\nmsg.payload = {\n    value: msg.payload,\n    fc: 4,\n    unitid: 1,//unitID,\n    address: 0xf860,//0,\n    quantity: 1\n};\n//else{\n//    msg=null;\n//}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 1320,
+        "wires": [
+            [
+                "a003a7f73768e909"
+            ]
+        ]
+    },
+    {
+        "id": "466aa5bb191e8f9a",
+        "type": "function",
+        "z": "de02eac62658ec1d",
+        "name": "FC4 - Unit-ID 1 - Register 0xf861",
+        "func": "//const unitID = flow.get(\"mid\");\nconst d_length = msg.payload;\n//const mode = flow.get(\"modbus_passthrough\");\n//if (mode==true){\nmsg.payload = {\n    value: msg.payload,\n    fc: 4,\n    unitid: 1,//unitID,\n    address: 0xf861,//0,\n    quantity: d_length//1 \n};\n//else{\n//    msg=null;\n//}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 1420,
+        "wires": [
+            [
+                "a003a7f73768e909"
+            ]
+        ]
+    },
+    {
+        "id": "d8a8a94373fe63b5",
+        "type": "function",
+        "z": "de02eac62658ec1d",
+        "name": "FC4 - Unit-ID 1 - Register 0xf460",
+        "func": "//const unitID = flow.get(\"mid\");\n//const mode = flow.get(\"modbus_passthrough\");\n//if (mode==true){\nmsg.payload = {\n    value: msg.payload,\n    fc: 4,\n    unitid: 1,//unitID,\n    address: 0xf460,//0,\n    quantity: 1\n};\n//else{\n//    msg=null;\n//}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 1580,
+        "wires": [
+            [
+                "a003a7f73768e909"
+            ]
+        ]
+    },
+    {
+        "id": "e0a0c1637158eeb9",
+        "type": "function",
+        "z": "de02eac62658ec1d",
+        "name": "FC4 - Unit-ID 1 - Register 0xf461",
+        "func": "//const unitID = flow.get(\"mid\");\nconst d_length = msg.payload;\n//const mode = flow.get(\"modbus_passthrough\");\n//if (mode==true){\nmsg.payload = {\n    value: msg.payload,\n    fc: 4,\n    unitid: 1,//unitID,\n    address: 0xf461,//0,\n    quantity: d_length//1 \n};\n//else{\n//    msg=null;\n//}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 1680,
+        "wires": [
+            [
+                "a003a7f73768e909"
+            ]
+        ]
+    },
+    {
+        "id": "a003a7f73768e909",
+        "type": "link out",
+        "z": "de02eac62658ec1d",
+        "name": "getLoRaResponse",
+        "mode": "link",
+        "links": [
+            "8a9dc34d1caf3b9b"
+        ],
+        "x": 1315,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "fb06c3d33f4b16a4",
+        "type": "link in",
+        "z": "de02eac62658ec1d",
+        "name": "link in 67",
+        "links": [
+            "34f7144501dca214"
+        ],
+        "x": 385,
+        "y": 1400,
+        "wires": [
+            [
+                "7368c8c9f43a4083"
+            ]
+        ]
+    },
+    {
+        "id": "632bcb645dde6803",
+        "type": "link in",
+        "z": "de02eac62658ec1d",
+        "name": "link in 68",
+        "links": [
+            "fed368d21a8a085a"
+        ],
+        "x": 385,
+        "y": 1660,
+        "wires": [
+            [
+                "415f3fee14dfb1d4"
+            ]
+        ]
+    },
+    {
+        "id": "ba06fa950b907149",
+        "type": "link in",
+        "z": "de02eac62658ec1d",
+        "name": "link in 69",
+        "links": [
+            "e8236adacfcfa5ea"
+        ],
+        "x": 395,
+        "y": 1940,
+        "wires": [
+            [
+                "e7d742b6ff5616e7"
+            ]
+        ]
+    },
+    {
+        "id": "e7d742b6ff5616e7",
+        "type": "ui_text",
+        "z": "de02eac62658ec1d",
+        "group": "058633845f213a82",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 590,
+        "y": 1940,
+        "wires": []
+    },
+    {
+        "id": "da6e32cdb219528c",
+        "type": "comment",
+        "z": "de02eac62658ec1d",
+        "name": "LoRaWAN Data",
+        "info": "Data come from 0xf861 or 0xf461 ",
+        "x": 460,
+        "y": 1880,
         "wires": []
     }
 ]
